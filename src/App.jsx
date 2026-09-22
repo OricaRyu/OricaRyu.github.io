@@ -473,10 +473,15 @@ const workExperience = [
   },
 ]
 
+const viewFromLocation = () =>
+  new URLSearchParams(window.location.search).get('view') === 'SynkroAI-UX-case-study'
+    ? 'caseStudy'
+    : 'home'
+
 function App() {
   const [activeCategory, setActiveCategory] = useState('ux')
   const [selectedProjectId, setSelectedProjectId] = useState('synkroai')
-  const [currentView, setCurrentView] = useState('home')
+  const [currentView, setCurrentView] = useState(viewFromLocation)
   const [copiedEmail, setCopiedEmail] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [caseMenuOpen, setCaseMenuOpen] = useState(false)
@@ -495,6 +500,13 @@ function App() {
     document.body.dataset.theme = theme
     localStorage.setItem('portfolio-theme', theme)
   }, [theme])
+
+  useEffect(() => {
+    // Query-based routing survives GitHub Pages refreshes without requiring server-side rewrites.
+    const handlePopState = () => setCurrentView(viewFromLocation())
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
   useEffect(() => {
     // Let the logo intro finish before the page takes over.
@@ -593,18 +605,32 @@ function App() {
     setActiveCategory(nextCategory)
     const nextProject = projects[nextCategory][0]
     setSelectedProjectId(nextProject.id)
-    setCurrentView('home')
+    navigateToView('home')
   }
 
   const handleProjectAction = (project) => {
     setSelectedProjectId(project.id)
     // SynkroAI is the only completed case study route; the other work stays intentionally unavailable.
     if (project.id === 'synkroai') {
-      setCurrentView('caseStudy')
+      navigateToView('caseStudy')
     }
   }
 
-  const goHome = () => setCurrentView('home')
+  const navigateToView = (nextView) => {
+    const url = new URL(window.location.href)
+    if (nextView === 'caseStudy') {
+      url.searchParams.set('view', 'SynkroAI-UX-case-study')
+    } else {
+      url.searchParams.delete('view')
+      url.hash = ''
+    }
+
+    window.history.pushState({}, '', `${url.pathname}${url.search}${url.hash}`)
+    setCurrentView(nextView)
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+
+  const goHome = () => navigateToView('home')
 
   const sectionFocusClass = (sectionId, activeId) =>
     activeId === sectionId ? 'section-focus is-current' : 'section-focus'
