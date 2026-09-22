@@ -1,0 +1,123 @@
+:root {
+  /* Components consume these shared tokens so the palette can change without rewriting every rule. */
+  --bg: #f4efe9;
+  --bg-strong: #e9e1d8;
+  --surface: #faf7f3;
+  --surface-secondary: #f2ece5;
+  --surface-elevated: #fffdfb;
+  --surface-muted: #ebe2d8;
+  --border: rgba(32, 28, 25, 0.1);
+  --border-strong: rgba(32, 28, 25, 0.24);
+  --text-strong: #171512;
+  --text-soft: #56524d;
+  --accent: #7b5bff;
+  --accent-strong: #5f45d6;
+  --shadow-soft: 0 20px 50px rgba(23, 21, 18, 0.08);
+  color-scheme: light;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body[data-theme='dark'] {
+  /* The theme toggle changes variables only; component styles keep the same semantic names. */
+  --bg: #12161b;
+  --bg-strong: #171d24;
+  --surface: #171d24;
+  --surface-secondary: #1c252d;
+  --surface-elevated: #212b34;
+  --surface-muted: #2b343d;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --text-strong: #f3efe8;
+  --text-soft: #c4bfb8;
+  --accent: #a58cff;
+  --accent-strong: #886cf4;
+  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+* {
+  /* Include padding and borders in dimensions so responsive cards do not unexpectedly overflow. */
+  box-sizing: border-box;
+}
+
+html {
+  /* Anchor links from both menus move through the portfolio without an abrupt jump. */
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  /* This creates a predictable stacking context for the animated background layer below. */
+  isolation: isolate;
+  background:
+    radial-gradient(circle at top, rgba(123, 91, 255, 0.12), transparent 24%),
+    var(--bg);
+  color: var(--text-strong);
+}
+
+body::before {
+  /* Keep the motion in the atmosphere, not in the content the visitor needs to read. */
+  position: fixed;
+  inset: -25%;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 15% 30%, rgba(123, 91, 255, 0.12), transparent 30%),
+    radial-gradient(ellipse at 80% 60%, rgba(238, 145, 93, 0.1), transparent 28%),
+    radial-gradient(ellipse at 45% 80%, rgba(53, 139, 122, 0.08), transparent 26%);
+  content: '';
+  opacity: 0.7;
+  pointer-events: none;
+  animation: backgroundFlow 18s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundFlow {
+  /* Moving oversized gradients is cheaper and calmer than animating the page's content itself. */
+  from { transform: translate3d(-2%, -1%, 0) rotate(-2deg) scale(1); }
+  to { transform: translate3d(2%, 1%, 0) rotate(2deg) scale(1.08); }
+}
+
+img {
+  /* Images stay inside their cards while preserving their intrinsic aspect ratio by default. */
+  max-width: 100%;
+  display: block;
+}
+
+button,
+a {
+  /* Interactive elements inherit the site's typography instead of falling back to browser defaults. */
+  font: inherit;
+}
+
+#root {
+  /* Content sits above the decorative background while still allowing fixed controls to use their own layers. */
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The visual theme remains, but movement does not become a requirement for using the site. */
+  body::before {
+    animation: none;
+  }
+}
+
+main {
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  /* Serif headings provide the portfolio's editorial contrast against the interface-oriented body type. */
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
