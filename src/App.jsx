@@ -20,8 +20,11 @@ const socialLinks = [
   { label: 'Medium', href: 'https://medium.com/@basiviolette', icon: FaMedium },
 ]
 
+// Public assets need Vite's base path so they also work from a GitHub Pages project URL.
+const publicAsset = (relativePath) => `${import.meta.env.BASE_URL}${relativePath}`
+
 // Case-study images live in public so the published site does not depend on assignment source folders.
-const asset = (relativePath) => `/case-study/${relativePath}`
+const asset = (relativePath) => publicAsset(`case-study/${relativePath}`)
 
 // Keeping portfolio content in one place makes it easier to replace placeholders with real work later.
 const projects = {
@@ -246,12 +249,12 @@ const caseStudyNavItems = [
 
 const personaGallery = [
   {
-    src: '/persona-1.png',
+    src: publicAsset('persona-1.png'),
     title: 'Randy Petravic',
     caption: 'Figure 1. A persona of a course coordinator and course developer working for the School of Applied Computer Sciences who experiences trouble with version control, real-time collaboration, and delayed responses from colleagues and students in remote work and project management.',
   },
   {
-    src: '/persona-2.png',
+    src: publicAsset('persona-2.png'),
     title: 'Jane Williamson',
     caption: 'Figure 2. A persona of a team lead and lead software developer working for a startup AI company who experiences difficulties managing tasks across multiple tools, leading to inefficiencies, and wants an all-in-one project management solution to assist in time management and team collaboration.',
   },
@@ -259,25 +262,25 @@ const personaGallery = [
 
 const surveyFigures = [
   {
-    src: '/survey-figures/figure-3-remote-challenges.png',
+    src: publicAsset('survey-figures/figure-3-remote-challenges.png'),
     title: 'Remote work challenges',
     caption: 'Figure 3. A bar chart depicting users’ most significant challenges when working remotely.',
     takeaway: 'Communication was the largest reported challenge at 75%, while tracking project progress affected 58.3% of respondents.',
   },
   {
-    src: '/survey-figures/figure-6-progress-difficulty.png',
+    src: publicAsset('survey-figures/figure-6-progress-difficulty.png'),
     title: 'Progress visibility',
     caption: 'Figure 6. A bar chart depicting the trends in how difficult it is for users to track project progress remotely.',
     takeaway: 'Most responses clustered at the difficult end of the scale, reinforcing the need for a clearer shared project view.',
   },
   {
-    src: '/survey-figures/figure-12-file-concerns.png',
+    src: publicAsset('survey-figures/figure-12-file-concerns.png'),
     title: 'File collaboration concerns',
     caption: 'Figure 12. A bar chart depicting the main concerns users experience regarding file sharing.',
     takeaway: 'Version control, collaboration, and integration with other tools were each selected by 66.7% of respondents.',
   },
   {
-    src: '/survey-figures/figure-14-valued-features.png',
+    src: publicAsset('survey-figures/figure-14-valued-features.png'),
     title: 'What users value',
     caption: 'Figure 14. A bar chart depicting the features users believe are most valuable to include in an all-in-one remote work application.',
     takeaway: 'Easy scheduling and real-time collaboration were selected by all respondents; integrated project management followed at 83.3%.',
@@ -1085,7 +1088,7 @@ function App() {
 
       <header className="topbar">
         <div className="brand" aria-label="Sébastien Violette portfolio">
-          <img src="/logo-mark-transparent.png" alt="Sébastien Violette logo mark" />
+          <img src={publicAsset('logo-mark-transparent.png')} alt="Sébastien Violette logo mark" />
         </div>
 
         <button
@@ -1126,7 +1129,7 @@ function App() {
           <div className="hero-panel reveal-card" aria-label="About Sébastien Violette">
             <div className="profile-card">
               <div className="profile-image-wrap">
-                <img src="/profile.png" alt="Portrait of Sébastien Violette" className="profile-image" />
+                <img src={publicAsset('profile.png')} alt="Portrait of Sébastien Violette" className="profile-image" />
               </div>
               <div className="profile-details">
                 <span className="mini-label">Based in Ontario, Canada</span>
@@ -1148,7 +1151,7 @@ function App() {
               <span className="mini-label">Professional background</span>
               <p>Explore my experience, technical skills, education, and project history.</p>
               <a
-                href="/Sebastien-Violette-Resume.pdf"
+                href={publicAsset('Sebastien-Violette-Resume.pdf')}
                 target="_blank"
                 rel="noreferrer"
                 className="resume-link"
@@ -1413,7 +1416,7 @@ function PortfolioIntro() {
   return (
     <div className="portfolio-intro" aria-hidden="true">
       <div className="intro-mark">
-        <img src="/logo-mark-transparent.png" alt="" />
+        <img src={publicAsset('logo-mark-transparent.png')} alt="" />
       </div>
       <span className="intro-rule" />
     </div>
