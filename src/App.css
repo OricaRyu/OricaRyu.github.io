@@ -215,7 +215,7 @@
   letter-spacing: 0.14em;
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .hero-copy h1 {
@@ -253,8 +253,8 @@
 }
 
 .primary-btn {
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-  color: #fff;
+  background: var(--button-bg);
+  color: var(--button-text);
   border-color: transparent;
   box-shadow: 0 18px 30px rgba(123, 91, 255, 0.22);
 }
@@ -268,11 +268,18 @@
 
 .secondary-btn:hover,
 .theme-toggle:hover,
-.category-btn:hover,
 .project-action:hover,
 .social-link:hover {
   background: var(--surface-muted);
   border-color: var(--accent);
+}
+
+/* Hover only on real pointers, and never on the selected tab, so a clicked tab cannot look stuck. */
+@media (hover: hover) {
+  .category-btn:not(.active):hover {
+    background: var(--surface-muted);
+    border-color: var(--accent);
+  }
 }
 
 .hero-panel {
@@ -397,7 +404,7 @@
 }
 
 .resume-link span {
-  color: var(--accent-strong);
+  color: var(--accent-text);
   font-size: 1.15rem;
 }
 
@@ -452,9 +459,9 @@
 }
 
 .category-btn.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--button-bg);
   box-shadow: var(--shadow-soft);
 }
 
@@ -786,16 +793,16 @@
   justify-content: center;
   min-height: 52px;
   width: 100%;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--button-bg);
   border-radius: 12px;
-  background: var(--accent);
-  color: #fff;
+  background: var(--button-bg);
+  color: var(--button-text);
   cursor: pointer;
   font-weight: 700;
 }
 
 .footer-copy-email:hover {
-  background: var(--accent-strong);
+  background: var(--button-bg-hover);
 }
 
 .footer-social-links {
@@ -1235,7 +1242,7 @@
 .research-signal > span {
   display: inline-flex;
   margin-bottom: 28px;
-  color: var(--accent-strong);
+  color: var(--accent-text);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -1314,7 +1321,7 @@
 .competitive-card > p {
   grid-row: span 3;
   margin: 0;
-  color: var(--accent-strong);
+  color: var(--accent-text);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -1403,7 +1410,7 @@
 }
 
 .survey-card figcaption em {
-  color: var(--accent-strong);
+  color: var(--accent-text);
   font-style: normal;
 }
 
@@ -1767,7 +1774,7 @@
 }
 
 .side-nav a.active {
-  color: var(--accent-strong);
+  color: var(--accent-text);
   font-weight: 700;
 }
 
@@ -1986,7 +1993,7 @@
   border-radius: 12px;
   background: var(--surface-elevated);
   border: 1px solid var(--border);
-  color: var(--accent-strong);
+  color: var(--accent-text);
   padding: 9px;
   font-size: 1.2rem;
 }
@@ -2185,7 +2192,7 @@
   .side-nav-links a:hover {
     background: var(--surface-secondary);
     border-color: var(--border);
-    color: var(--accent-strong);
+    color: var(--accent-text);
   }
 
   .side-nav-contact {
@@ -2304,7 +2311,7 @@
   }
 
   .side-nav-links a.active {
-    color: var(--accent-strong);
+    color: var(--accent-text);
   }
 
   .project-stack {
@@ -2434,7 +2441,7 @@
 
 .case-study-menu a.active,
 .case-study-menu a:hover {
-  color: var(--accent-strong);
+  color: var(--accent-text);
   font-weight: 700;
 }
 

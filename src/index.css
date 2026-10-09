@@ -12,6 +12,11 @@
   --text-soft: #56524d;
   --accent: #7b5bff;
   --accent-strong: #5f45d6;
+  /* Text-safe accent and button pair; the raw accent fails 4.5:1 against light surfaces. */
+  --accent-text: #5f45d6;
+  --button-bg: #5f45d6;
+  --button-bg-hover: #4b33b8;
+  --button-text: #ffffff;
   --shadow-soft: 0 20px 50px rgba(23, 21, 18, 0.08);
   color-scheme: light;
   font-family: 'Inter', 'Segoe UI', sans-serif;
@@ -37,6 +42,11 @@ body[data-theme='dark'] {
   --text-soft: #c4bfb8;
   --accent: #a58cff;
   --accent-strong: #886cf4;
+  /* Dark mode flips the button pair: dark text on light violet instead of white on mid violet. */
+  --accent-text: #a58cff;
+  --button-bg: #a58cff;
+  --button-bg-hover: #b9a5ff;
+  --button-text: #12161b;
   --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.25);
   color-scheme: dark;
 }

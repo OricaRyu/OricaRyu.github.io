@@ -605,7 +605,8 @@ function App() {
     setActiveCategory(nextCategory)
     const nextProject = projects[nextCategory][0]
     setSelectedProjectId(nextProject.id)
-    navigateToView('home')
+    // Only leave the case study; switching tabs on the homepage must keep the scroll position.
+    if (currentView !== 'home') navigateToView('home')
   }
 
   const handleProjectAction = (project) => {
@@ -1200,6 +1201,7 @@ function App() {
                 key={category.id}
                 type="button"
                 className={category.id === activeCategory ? 'category-btn active' : 'category-btn'}
+                aria-pressed={category.id === activeCategory}
                 onClick={() => handleCategoryChange(category.id)}
               >
                 {category.label}
